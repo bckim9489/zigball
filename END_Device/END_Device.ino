@@ -8,7 +8,7 @@ SoftwareSerial xbee(2, 3);
 void setup() {
   Serial.begin(9600);
   xbee.begin(9600);
-  myservo.attach(8);
+  
 }
 
 void loop() {
@@ -16,12 +16,14 @@ void loop() {
     String inString = xbee.readStringUntil('\n');
     //Serial.print(inString);
     
+    
     String origin = inString; 
     char key_first =',';
-    int count =0;
+    //int count =0;
     int get_index = 0;
     String tmp = "";
     String cp = origin;
+    
 
     while(true){
       get_index = cp.indexOf(key_first);
@@ -32,10 +34,11 @@ void loop() {
       }
       
       else{
+        
         movement(cp);
         break;
       }
-      ++count;
+      //++count;
     }
   }
 }
@@ -53,11 +56,12 @@ void movement(String a){
     data = 0; 
   }
 
-  Serial.print("data: ");
+  //Serial.print("data: ");
   Serial.print(data);
-  Serial.print("\n");
-  
+  //Serial.print("\n");
+  myservo.attach(8);
   myservo.write(data);
-         
-  delay(700);
+  
+  delay(1000);
+  myservo.detach();
 }
