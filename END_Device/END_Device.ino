@@ -16,9 +16,9 @@ Stepper myStepper_horizon(stepsPerRevolution, A3,A1,A2,A0);
 void setup() {  
   Serial.begin(9600);
   xbee.begin(9600);
-  myStepper_spin.setSpeed(12);
-  myStepper_horizon.setSpeed(12);
-  myStepper_push.setSpeed(12);
+  myStepper_spin.setSpeed(10);
+  myStepper_horizon.setSpeed(10);
+  myStepper_push.setSpeed(10);
 
 }
 
@@ -53,7 +53,7 @@ void loop() {
       }
     }
     movement_init();
-    xbee.write('A');e
+    //xbee.write('A');
     soft_restart();
   }
 }
@@ -71,7 +71,7 @@ void movement(String a){
   else if(a[0] == 'P'){
     a = a.substring(1);
     data = a.toInt();
-    if(data == 0){ //just Push, init() function is auto recovery Pull
+    if(data == 1){ //just Push, init() function is auto recovery Pull
       data = -2048;
       movement_push(data);
     }
